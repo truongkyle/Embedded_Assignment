@@ -36,10 +36,10 @@ void setup() {
   Serial.begin(115200);
   delay(10);
   // define pinMode Servo
-  MyServo1.attach(D6);
+  MyServo1.attach(D1);
   MyServo1.write(53);
   delay(1000);
-  MyServo2.attach(D7);
+  MyServo2.attach(D2);
   MyServo2.write(100);
   delay(1000);
 // connect Wifi 
@@ -105,7 +105,7 @@ void ProcessFeeding(int Numbers){
 
 
 
-      MyServo1.attach(D6);
+      MyServo1.attach(D4);
       MyServo1.write(75);
       Delay(1000,listening);
       MyServo1.write(53);
