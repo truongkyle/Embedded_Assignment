@@ -2,6 +2,11 @@
 #include <SocketIOClient.h>
 #include <ArduinoJson.h>
 #include<Servo.h>
+#include "DHT.h"            
+ 
+const int DHTTYPE = DHT11;  //Khai báo loại cảm biến, có 2 loại là DHT11 và DHT22
+ 
+DHT dht(D3, DHTTYPE);
 
 // define servo
 Servo MyServo1, MyServo2;
@@ -42,6 +47,8 @@ void setup() {
   MyServo2.attach(D2);
   MyServo2.write(100);
   delay(1000);
+  //start sensor dht11
+  dht.begin();
 // connect Wifi 
   Serial.println();
   Serial.println();
@@ -95,7 +102,8 @@ void ProcessFeeding(int Numbers){
         return;
       }
         String JSON;
-        int Temp = random(20,40);
+//        int Temp = random(20,40);
+        int Temp = dht.readTemperature();
         rootprocess["Numbers"] = i+1;
         rootprocess["Temperature"] = Temp ;
         rootprocess.printTo(JSON);  
@@ -105,12 +113,12 @@ void ProcessFeeding(int Numbers){
 
 
 
-      MyServo1.attach(D4);
+      MyServo1.attach(D1);
       MyServo1.write(75);
       Delay(1000,listening);
       MyServo1.write(53);
       Delay(1000,listening);
-      MyServo2.attach(D7);
+      MyServo2.attach(D2);
       MyServo2.write(75);
       Delay(1000,listening);
       MyServo2.write(100);
@@ -130,7 +138,8 @@ void loop() {
   if (currentMillis - previousMillis > interval)
   { 
     String JSON;
-    int Temp = random(20,40);
+//    int Temp = random(20,40);
+    int Temp = dht.readTemperature();
 
     root["Temperature"] = Temp;
     root.printTo(JSON);
