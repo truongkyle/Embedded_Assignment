@@ -42,10 +42,13 @@ void setup() {
   delay(10);
   // define pinMode Servo
   MyServo1.attach(D1);
-  MyServo1.write(53);
+  MyServo1.write(0);
   delay(1000);
   MyServo2.attach(D2);
-  MyServo2.write(100);
+  MyServo2.write(155);
+  delay(1000);
+  MyServo2.attach(D2);
+  MyServo2.write(180);
   delay(1000);
   //start sensor dht11
   dht.begin();
@@ -114,14 +117,14 @@ void ProcessFeeding(int Numbers){
 
 
       MyServo1.attach(D1);
-      MyServo1.write(75);
+      MyServo1.write(22);
       Delay(1000,listening);
-      MyServo1.write(53);
+      MyServo1.write(0);
       Delay(1000,listening);
       MyServo2.attach(D2);
-      MyServo2.write(75);
+      MyServo2.write(155);
       Delay(1000,listening);
-      MyServo2.write(100);
+      MyServo2.write(180);
       Delay(1000,listening);
        if(check) {
         check = false;
